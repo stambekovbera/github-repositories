@@ -3,7 +3,6 @@ import { Box, IconButton, TextField } from '@mui/material';
 import { SearchRounded as SearchIcon } from '@mui/icons-material';
 import cn from 'classnames';
 import {
-    getRepositories,
     getRepositoriesPage,
     getRepositoriesPerPage,
     getRepositoriesQuery,
@@ -40,11 +39,6 @@ export const SearchRepoInput: React.FC<ISearchRepoInputProps> = (props) => {
     const onSearch = () => {
         if (query.length > 5) {
             navigate( `/search?query=${ query }&page=${ page }&per_page=${ per_page }` );
-            dispatch( getRepositories( {
-                page,
-                per_page,
-                q: query
-            } ) );
         } else {
             dispatch( toasterActions.setIsOpen( {
                 isOpen: true,
