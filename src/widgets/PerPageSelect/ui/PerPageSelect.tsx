@@ -35,6 +35,7 @@ export const PerPageSelect: React.FC<IPerPageSelectProps> = (props) => {
 
         dispatch( repositoriesActions.setPerPage( +value ) );
         dispatch( repositoriesActions.setPage( 1 ) );
+        dispatch( repositoriesActions.setNewQuery( query ) );
         navigate( `/search?query=${ query }&page=${ 1 }&per_page=${ value }` );
         dispatch( getRepositories( {
             q: query,

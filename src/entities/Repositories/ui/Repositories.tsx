@@ -43,6 +43,7 @@ export const Repositories: React.FC<IRepositoriesProps> = (props) => {
 
     const changePagination = (event: React.ChangeEvent<unknown>, newPage: number) => {
         dispatch( repositoriesActions.setPage( newPage ) );
+        dispatch( repositoriesActions.setNewQuery( query ) );
         navigate( `/search?query=${ query }&page=${ newPage }&per_page=${ per_page }` );
         dispatch( getRepositories( {
             q: query,
