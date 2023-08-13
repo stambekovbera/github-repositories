@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { IRepository } from '../../types/repositories';
 import { agent } from 'shared/lib/agent/agent';
+import { IRepository } from 'entities/Repository';
 
 interface IGetRepositoriesProps {
     q: string;
