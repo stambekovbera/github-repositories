@@ -1,4 +1,8 @@
 .repository {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #a2a3a4;

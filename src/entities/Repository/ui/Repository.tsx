@@ -21,11 +21,20 @@ export const Repository: React.FC<IRepositoryProps> = (props) => {
     } = props;
     return (
         <Box className={ cn( classes.repository, {}, [ className ] ) }>
-            <Typography variant='h3'>
-                { repository.name }
-            </Typography>
+            <Link
+                to={ repository.html_url }
+                target='_blank'
+            >
+                <Typography variant='h3'>
+                    { repository.name }
+                </Typography>
+            </Link>
 
-            <Link className={ classes.authorWrapper } to={ repository.owner.html_url }>
+            <Link
+                className={ classes.authorWrapper }
+                to={ repository.owner.html_url }
+                target='_blank'
+            >
                 <Avatar
                     sx={ { width: 50, height: 50 } }
                     alt={ repository.owner.login }
