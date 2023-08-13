@@ -50,7 +50,7 @@ export const SearchPage: React.FC<ISearchPageProps> = (props) => {
         if (repositories.length <= 0) {
             initPage();
         }
-    }, [ repositories ] );
+    }, [] );
 
     return (
         <section className={ cn( classes.searchPage, {}, [ className ] ) }>
