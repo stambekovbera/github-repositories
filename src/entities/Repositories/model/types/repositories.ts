@@ -2,6 +2,7 @@ import { IRepository } from 'entities/Repository';
 
 export interface IRepositoriesFilter {
     query: string;
+    new_query: string;
     total_count: number;
     page: number;
     per_page: number;

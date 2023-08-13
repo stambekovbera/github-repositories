@@ -25,7 +25,7 @@ export const SearchRepoInput: React.FC<ISearchRepoInputProps> = (props) => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const query = useSelector( getRepositoriesQuery );
+    const { new_query, query } = useSelector( getRepositoriesQuery );
     const page = useSelector( getRepositoriesPage );
     const per_page = useSelector( getRepositoriesPerPage );
 
@@ -34,16 +34,17 @@ export const SearchRepoInput: React.FC<ISearchRepoInputProps> = (props) => {
             value
         } = event.target;
 
-        dispatch( repositoriesActions.setQuery( value ) );
+        dispatch( repositoriesActions.setNewQuery( value ) );
     };
 
     const onSearch = () => {
-        if (query.length > 5) {
-            navigate( `/search?query=${ query }&page=${ page }&per_page=${ per_page }` );
+        if (new_query.length > 5) {
+            dispatch( repositoriesActions.setQuery( new_query ) );
+            navigate( `/search?query=${ new_query }&page=${ page }&per_page=${ per_page }` );
             dispatch( getRepositories( {
                 page,
                 per_page,
-                q: query
+                q: new_query
             } ) );
         } else {
             dispatch( toasterActions.setIsOpen( {
@@ -59,7 +60,7 @@ export const SearchRepoInput: React.FC<ISearchRepoInputProps> = (props) => {
             <TextField
                 className={ classes.searchRepoInput }
                 placeholder='Название репозитория'
-                value={ query }
+                value={ new_query }
                 InputProps={ {
                     endAdornment: <IconButton className={ classes.inputButton } color='secondary' onClick={ onSearch }>
                         <SearchIcon color='secondary'/>

@@ -26,7 +26,9 @@ export const Repositories: React.FC<IRepositoriesProps> = (props) => {
     const {
         repositories
     } = useSelector( getRepositoriesState );
-    const query = useSelector( getRepositoriesQuery );
+    const {
+        query
+    } = useSelector( getRepositoriesQuery );
 
     const renderContent = () => {
         if (isError) {

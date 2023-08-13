@@ -36,6 +36,7 @@ export const SearchPage: React.FC<ISearchPageProps> = (props) => {
         }
 
         dispatch( repositoriesActions.setQuery( query ) );
+        dispatch( repositoriesActions.setNewQuery( query ) );
         dispatch( repositoriesActions.setPage( page ) );
         dispatch( repositoriesActions.setPerPage( per_page ) );
         dispatch( getRepositories( {

@@ -12,6 +12,7 @@ const initialState: IRepositoriesSchema = {
         page: 1,
         per_page: 10,
         query: '',
+        new_query: '',
     },
 };
 
@@ -21,6 +22,9 @@ export const repositoriesSlice = createSlice( {
     reducers: {
         setQuery: (state, action: PayloadAction<string>) => {
             state.filter.query = action.payload;
+        },
+        setNewQuery: (state, action: PayloadAction<string>) => {
+            state.filter.new_query = action.payload;
         },
         setPage: (state, action: PayloadAction<number>) => {
             state.filter.page = action.payload;
