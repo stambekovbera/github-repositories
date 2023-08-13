@@ -33,7 +33,7 @@ export interface IRepository {
     node_id: string;
     name: string;
     full_name: string;
-    owner: IRepositoryOwner;
+    owner: IRepositoryOwner | null;
     private: boolean;
     html_url: string;
     description: string;

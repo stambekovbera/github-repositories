@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Avatar, Box, Typography } from '@mui/material';
+import { Avatar, Box, Typography, Button } from '@mui/material';
 import {
     StarRounded as StarIcon,
     VisibilityRounded as EyeIcon
@@ -30,18 +30,25 @@ export const Repository: React.FC<IRepositoryProps> = (props) => {
                 </Typography>
             </Link>
 
-            <Link
-                className={ classes.authorWrapper }
-                to={ repository.owner.html_url }
-                target='_blank'
-            >
-                <Avatar
-                    sx={ { width: 50, height: 50 } }
-                    alt={ repository.owner.login }
-                    src={ repository.owner.avatar_url }
-                />
-                <Typography variant='h3'>{ repository.owner.login }</Typography>
-            </Link>
+            { repository.owner
+                ? (
+                    <Link
+                        className={ classes.authorWrapper }
+                        to={ repository.owner.html_url }
+                        target='_blank'
+                    >
+                        <Avatar
+                            sx={ { width: 50, height: 50 } }
+                            alt={ repository.owner.login }
+                            src={ repository.owner.avatar_url }
+                        />
+                        <Typography variant='h3'>{ repository.owner.login }</Typography>
+                    </Link>
+                )
+                : (
+                    <Typography variant='h3'>Автор удален</Typography>
+                )
+            }
 
             <Box className={ classes.repositoryStatistics }>
                 <Box className={ classes.repositoryStatistic }>
@@ -57,6 +64,9 @@ export const Repository: React.FC<IRepositoryProps> = (props) => {
                     </Typography>
                 </Box>
             </Box>
+            <Button fullWidth variant='contained'>
+                Редактировать
+            </Button>
         </Box>
     );
 };
