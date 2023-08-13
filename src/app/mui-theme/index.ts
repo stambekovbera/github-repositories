@@ -11,7 +11,8 @@ import {
     MuiDialogActions,
     MuiOutlinedInput,
     MuiPagination,
-    MuiBackdrop
+    MuiBackdrop,
+    MuiIconButton
 } from './overrides';
 
 const theme = createTheme( {
@@ -27,6 +28,7 @@ const theme = createTheme( {
         MuiOutlinedInput,
         MuiPagination,
         MuiBackdrop,
+        MuiIconButton
     },
 } );
 

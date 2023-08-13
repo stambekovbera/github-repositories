@@ -1,0 +1,30 @@
+.search-repo-input-wrapper {
+    width: 100%;
+}
+
+.search-repo-input {
+    width: 100%;
+
+    :global {
+        .MuiInputBase-root {
+            padding: 0;
+
+            &:hover {
+                .MuiOutlinedInput-notchedOutline {
+                    outline: none;
+                    border-color: var(--primary);
+                }
+            }
+        }
+    }
+}
+
+.input-button:global.MuiIconButton-root {
+    min-height: 55px;
+    background-color: var(--primary);
+    border-radius: 0;
+
+    &:hover {
+        background-color: var(--primary);
+    }
+}

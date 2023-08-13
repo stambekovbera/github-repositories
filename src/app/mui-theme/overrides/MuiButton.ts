@@ -3,9 +3,9 @@ import { palette } from '../common';
 export default {
     styleOverrides: {
         root: {
-            height: 55,
+            height: 50,
             padding: '8px 12px',
-            borderRadius: '14px',
+            borderRadius: '0',
             boxShadow: 'none'
         },
         contained: {},

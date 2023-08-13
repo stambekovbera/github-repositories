@@ -1,17 +1,21 @@
-import {palette} from '../common';
+import { palette } from '../common';
 
 export default {
     styleOverrides: {
         root: {
             '& .MuiPaginationItem-root': {
-                padding: '6px 8px',
+                minWidth: 52,
+                minHeight: 52,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
                 borderRadius: 0,
                 opacity: 1,
 
-                fontSize: 14,
-                lineHeight: '17px',
+                fontSize: 16,
+                fontWeight: 400,
+                lineHeight: '18px',
                 textAlign: 'center',
-                fontFeatureSettings: '\'ss03\' on, \'ss06\' on',
                 color: '#000000',
 
                 '&.Mui-selected': {
@@ -26,15 +30,5 @@ export default {
                 color: palette.primary.main,
             },
         },
-        ul: {
-            '& li': {
-                '&:first-child .MuiButtonBase-root': {
-                    borderRadius: '4px 0 0 4px'
-                },
-                '&:last-child .MuiButtonBase-root': {
-                    borderRadius: '0 4px 4px 0'
-                },
-            }
-        }
     }
 };
