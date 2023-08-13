@@ -1,0 +1,11 @@
+input,
+button {
+    outline: none;
+    border: none;
+}
+
+input:focus,
+button:focus,
+select:focus {
+    outline: 0;
+}
