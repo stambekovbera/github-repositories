@@ -6,6 +6,7 @@ import { getRepositories, getRepositoriesState, Repositories, repositoriesAction
 import { SearchRepoInput } from 'widgets/SearchRepoInput';
 import queryString from 'query-string';
 import { useDispatch, useSelector } from 'react-redux';
+import { PerPageSelect } from 'widgets/PerPageSelect';
 
 interface ISearchPageProps {
     className?: string;
@@ -60,6 +61,9 @@ export const SearchPage: React.FC<ISearchPageProps> = (props) => {
                         <SearchRepoInput/>
                     </Box>
                     <Box>
+                        <PerPageSelect/>
+                    </Box>
+                    <Box width='100%'>
                         <Repositories/>
                     </Box>
                 </Box>
