@@ -1,15 +1,21 @@
 import React from 'react';
 import cn from 'classnames';
-import { Typography } from '@mui/material';
+import { Box, Pagination, Typography } from '@mui/material';
 import classes from './Repositories.module.scss';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
+    getRepositories,
     getRepositoriesErrorText,
     getRepositoriesIsError,
-    getRepositoriesIsLoading, getRepositoriesQuery,
-    getRepositoriesState
+    getRepositoriesIsLoading,
+    getRepositoriesPage,
+    getRepositoriesPerPage,
+    getRepositoriesQuery,
+    getRepositoriesState,
+    getRepositoriesTotalCount, repositoriesActions
 } from 'entities/Repositories';
 import { Repository } from 'entities/Repository';
+import { useNavigate } from 'react-router-dom';
 
 interface IRepositoriesProps {
     className?: string;
@@ -20,6 +26,8 @@ export const Repositories: React.FC<IRepositoriesProps> = (props) => {
         className = '',
     } = props;
 
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const isLoading = useSelector( getRepositoriesIsLoading );
     const isError = useSelector( getRepositoriesIsError );
     const errorText = useSelector( getRepositoriesErrorText );
@@ -29,6 +37,19 @@ export const Repositories: React.FC<IRepositoriesProps> = (props) => {
     const {
         query
     } = useSelector( getRepositoriesQuery );
+    const page = useSelector( getRepositoriesPage );
+    const totalCount = useSelector( getRepositoriesTotalCount );
+    const per_page = useSelector( getRepositoriesPerPage );
+
+    const changePagination = (event: React.ChangeEvent<unknown>, newPage: number) => {
+        dispatch( repositoriesActions.setPage( newPage ) );
+        navigate( `/search?query=${ query }&page=${ newPage }&per_page=${ per_page }` );
+        dispatch( getRepositories( {
+            q: query,
+            page: newPage,
+            per_page,
+        } ) );
+    };
 
     const renderContent = () => {
         if (isError) {
@@ -48,7 +69,8 @@ export const Repositories: React.FC<IRepositoriesProps> = (props) => {
         }
 
         return (
-            <>
+
+            <Box className={ classes.repositoriesWrapper }>
                 <ul className={ cn( classes.repositories, {}, [ className ] ) }>
                     { repositories.map( (repository) => (
                         <li
@@ -58,7 +80,14 @@ export const Repositories: React.FC<IRepositoriesProps> = (props) => {
                         </li>
                     ) ) }
                 </ul>
-            </>
+
+                <Pagination
+                    page={ page }
+                    count={ Math.ceil( totalCount / per_page ) }
+
+                    onChange={ changePagination }
+                />
+            </Box>
         );
     };
 

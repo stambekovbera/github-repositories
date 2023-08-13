@@ -4,7 +4,6 @@ import { SearchRounded as SearchIcon } from '@mui/icons-material';
 import cn from 'classnames';
 import {
     getRepositories,
-    getRepositoriesPage,
     getRepositoriesPerPage,
     getRepositoriesQuery,
     repositoriesActions
@@ -26,7 +25,6 @@ export const SearchRepoInput: React.FC<ISearchRepoInputProps> = (props) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { new_query, query } = useSelector( getRepositoriesQuery );
-    const page = useSelector( getRepositoriesPage );
     const per_page = useSelector( getRepositoriesPerPage );
 
     const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
@@ -40,9 +38,10 @@ export const SearchRepoInput: React.FC<ISearchRepoInputProps> = (props) => {
     const onSearch = () => {
         if (new_query.length > 5) {
             dispatch( repositoriesActions.setQuery( new_query ) );
-            navigate( `/search?query=${ new_query }&page=${ page }&per_page=${ per_page }` );
+            dispatch( repositoriesActions.setPage( 1 ) );
+            navigate( `/search?query=${ new_query }&page=${ 1 }&per_page=${ per_page }` );
             dispatch( getRepositories( {
-                page,
+                page: 1,
                 per_page,
                 q: new_query
             } ) );

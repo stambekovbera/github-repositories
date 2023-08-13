@@ -27,7 +27,6 @@ export const PerPageSelect: React.FC<IPerPageSelectProps> = (props) => {
     const {
         query
     } = useSelector( getRepositoriesQuery );
-    const page = useSelector( getRepositoriesPage );
 
     const handleChange = (event: SelectChangeEvent<string>) => {
         const {
@@ -35,11 +34,12 @@ export const PerPageSelect: React.FC<IPerPageSelectProps> = (props) => {
         } = event.target;
 
         dispatch( repositoriesActions.setPerPage( +value ) );
-        navigate( `/search?query=${ query }&page=${ page }&per_page=${ value }` );
+        dispatch( repositoriesActions.setPage( 1 ) );
+        navigate( `/search?query=${ query }&page=${ 1 }&per_page=${ value }` );
         dispatch( getRepositories( {
             q: query,
             per_page: +value,
-            page,
+            page: 1,
         } ) );
     };
 
