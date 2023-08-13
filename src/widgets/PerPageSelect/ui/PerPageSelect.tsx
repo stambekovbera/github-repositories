@@ -5,7 +5,6 @@ import { Box, FormControl, MenuItem, Select, SelectChangeEvent } from '@mui/mate
 import { useDispatch, useSelector } from 'react-redux';
 import {
     getRepositories,
-    getRepositoriesPage,
     getRepositoriesPerPage,
     getRepositoriesQuery,
     repositoriesActions
