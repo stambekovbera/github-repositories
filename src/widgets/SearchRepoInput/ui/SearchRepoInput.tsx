@@ -48,7 +48,7 @@ export const SearchRepoInput: React.FC<ISearchRepoInputProps> = (props) => {
         } else {
             dispatch( toasterActions.setIsOpen( {
                 isOpen: true,
-                message: 'Минимальная длина 5 символов!',
+                message: 'Минимальная длина поисковой строки 5 символов!',
                 type: 'error',
             } ) );
         }

@@ -20,6 +20,7 @@ import cn from 'classnames';
 import classes from './DialogEditRepository.module.scss';
 import { dialogEditRepositoryActions } from 'features/DialogEditRepository';
 import { repositoriesActions } from 'entities/Repositories';
+import { toasterActions } from 'features/Toaster';
 
 interface IDialogEditRepositoryProps {
     className?: string;
@@ -60,6 +61,16 @@ export const DialogEditRepository: React.FC<IDialogEditRepositoryProps> = (props
     };
 
     const onSave = () => {
+        if (Boolean( !repository.owner.deleted ) && repository.owner.login.length <= 0) {
+            dispatch( toasterActions.setIsOpen( {
+                isOpen: true,
+                message: 'Минимальная длина имени пользователя 3 символа!',
+                type: 'error',
+            } ) );
+
+            return;
+        }
+
         dispatch( repositoriesActions.onEditRepository( repository ) );
         onClose();
     };
