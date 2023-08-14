@@ -19,6 +19,7 @@ import {
 import cn from 'classnames';
 import classes from './DialogEditRepository.module.scss';
 import { dialogEditRepositoryActions } from 'features/DialogEditRepository';
+import { repositoriesActions } from 'entities/Repositories';
 
 interface IDialogEditRepositoryProps {
     className?: string;
@@ -56,6 +57,11 @@ export const DialogEditRepository: React.FC<IDialogEditRepositoryProps> = (props
 
     const onDeleteUser = () => {
         dispatch( dialogEditRepositoryActions.deleteUser() );
+    };
+
+    const onSave = () => {
+        dispatch( repositoriesActions.onEditRepository( repository ) );
+        onClose();
     };
 
     return (
@@ -128,6 +134,7 @@ export const DialogEditRepository: React.FC<IDialogEditRepositoryProps> = (props
                 </Button>
                 <Button
                     variant='contained'
+                    onClick={ onSave }
                 >
                     Сохранить
                 </Button>

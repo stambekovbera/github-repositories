@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IRepositoriesSchema } from '../types/repositories';
 import { getRepositories } from 'entities/Repositories';
+import { IRepository } from 'entities/Repository';
 
 const initialState: IRepositoriesSchema = {
     error_text: '',
@@ -31,6 +32,15 @@ export const repositoriesSlice = createSlice( {
         },
         setPerPage: (state, action: PayloadAction<number>) => {
             state.filter.per_page = action.payload;
+        },
+        onEditRepository: (state, action: PayloadAction<IRepository>) => {
+            state.repositories = state.repositories.map( (repo) => {
+                if (repo.id === action.payload.id) {
+                    return action.payload;
+                }
+
+                return repo;
+            } );
         },
     },
     extraReducers: (builder) => {
