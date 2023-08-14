@@ -2,13 +2,15 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { IStateSchema } from './StateSchema';
 import { repositoriesReducer } from 'entities/Repositories';
 import { toasterReducer } from 'features/Toaster';
+import { dialogEditRepositoryReducer } from 'features/DialogEditRepository';
 import storage from 'redux-persist/lib/storage';
 import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE, } from 'redux-persist';
 
 export const createReduxStore = (initialState?: IStateSchema) => {
-    const rootReducers = combineReducers( {
+    const rootReducers = combineReducers<IStateSchema>( {
         repositories: repositoriesReducer,
-        toaster: toasterReducer
+        toaster: toasterReducer,
+        dialogEditRepository: dialogEditRepositoryReducer,
     } );
 
     const persistConfig = {

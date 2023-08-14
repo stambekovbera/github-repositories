@@ -2,6 +2,7 @@ import React from 'react';
 import cn from 'classnames';
 import { AppRouter } from 'app/providers/router';
 import { Toaster } from 'features/Toaster';
+import { DialogEditRepository } from 'features/DialogEditRepository';
 
 export const App = () => {
 
@@ -13,6 +14,8 @@ export const App = () => {
                 </React.Suspense>
 
                 <Toaster/>
+
+                <DialogEditRepository/>
             </div>
         </>
     );

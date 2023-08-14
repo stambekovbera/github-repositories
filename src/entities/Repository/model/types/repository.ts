@@ -26,6 +26,7 @@ interface IRepositoryOwner {
     repos_url: string;
     events_url: string;
     site_admin: boolean;
+    deleted?: boolean;
 }
 
 export interface IRepository {
@@ -33,7 +34,7 @@ export interface IRepository {
     node_id: string;
     name: string;
     full_name: string;
-    owner: IRepositoryOwner | null;
+    owner: IRepositoryOwner;
     private: boolean;
     html_url: string;
     description: string;

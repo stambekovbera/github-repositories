@@ -8,6 +8,8 @@ import {
 import { IRepository } from '../model/types/repository';
 import cn from 'classnames';
 import classes from './Repository.module.scss';
+import { useDispatch } from 'react-redux';
+import { dialogEditRepositoryActions } from 'features/DialogEditRepository';
 
 interface IRepositoryProps {
     repository: IRepository;
@@ -19,6 +21,16 @@ export const Repository: React.FC<IRepositoryProps> = (props) => {
         repository,
         className = '',
     } = props;
+
+    const dispatch = useDispatch();
+
+    const openDialogEdit = () => {
+        dispatch( dialogEditRepositoryActions.setIsOpen( {
+            isOpen: true,
+            repository: repository,
+        } ) );
+    };
+
     return (
         <Box className={ cn( classes.repository, {}, [ className ] ) }>
             <Link
@@ -30,7 +42,7 @@ export const Repository: React.FC<IRepositoryProps> = (props) => {
                 </Typography>
             </Link>
 
-            { repository.owner
+            { !repository.owner.deleted
                 ? (
                     <Link
                         className={ classes.authorWrapper }
@@ -64,8 +76,8 @@ export const Repository: React.FC<IRepositoryProps> = (props) => {
                     </Typography>
                 </Box>
             </Box>
-            <Button fullWidth variant='contained'>
-                Редактировать
+            <Button fullWidth variant='contained' onClick={ openDialogEdit }>
+                Подробно
             </Button>
         </Box>
     );
