@@ -28,29 +28,17 @@ export const SearchPage: React.FC<ISearchPageProps> = (props) => {
             arrayFormat: 'bracket',
         } );
 
-        const page = +parseSearch?.page || 1;
         let query = parseSearch?.query || '';
-        const per_page = +parseSearch?.per_page || 10;
 
         if (Array.isArray( query )) {
             query = query.join( ' ' );
         }
 
-        dispatch( repositoriesActions.setQuery( query ) );
         dispatch( repositoriesActions.setNewQuery( query ) );
-        dispatch( repositoriesActions.setPage( page ) );
-        dispatch( repositoriesActions.setPerPage( per_page ) );
-        dispatch( getRepositories( {
-            page,
-            per_page,
-            q: query,
-        } ) );
     };
 
     React.useEffect( () => {
-        if (repositories.length <= 0) {
-            initPage();
-        }
+        initPage();
     }, [] );
 
     return (

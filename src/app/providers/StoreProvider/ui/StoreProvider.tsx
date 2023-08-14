@@ -3,6 +3,7 @@ import React from 'react';
 import { createReduxStore } from 'shared/config/storeConfig/store';
 import { IStateSchema } from 'shared/config/storeConfig/StateSchema';
 import { DeepPartial } from '@reduxjs/toolkit';
+import { PersistGate } from 'redux-persist/integration/react';
 
 interface IStoreProviderProps {
     children: React.ReactNode;
@@ -15,13 +16,18 @@ export const StoreProvider: React.FC<IStoreProviderProps> = (props) => {
         initialState
     } = props;
 
-    const store = createReduxStore(
+    const {
+        store,
+        persistor
+    } = createReduxStore(
         initialState as IStateSchema,
     );
 
     return (
         <Provider store={ store }>
-            { children }
+            <PersistGate loading={ '' } persistor={ persistor }>
+                { children }
+            </PersistGate>
         </Provider>
     );
 };

@@ -1,18 +1,40 @@
-import { configureStore, ReducersMapObject } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { IStateSchema } from './StateSchema';
 import { repositoriesReducer } from 'entities/Repositories';
 import { toasterReducer } from 'features/Toaster';
+import storage from 'redux-persist/lib/storage';
+import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, PURGE, REGISTER, REHYDRATE, } from 'redux-persist';
 
 export const createReduxStore = (initialState?: IStateSchema) => {
-    const rootReducers: ReducersMapObject<IStateSchema> = {
+    const rootReducers = combineReducers( {
         repositories: repositoriesReducer,
         toaster: toasterReducer
+    } );
+
+    const persistConfig = {
+        key: 'root',
+        storage,
+        whitelist: [ 'repositories' ],
     };
 
+    const persistedReducers = persistReducer( persistConfig, rootReducers );
 
-    return configureStore<IStateSchema>( {
-        reducer: rootReducers,
+    const store = configureStore( {
+        reducer: persistedReducers,
         devTools: __IS_DEV__,
         preloadedState: initialState,
+        middleware: (getDefaultMiddleware) =>
+            getDefaultMiddleware( {
+                serializableCheck: {
+                    ignoredActions: [ FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER ],
+                },
+            } ),
     } );
+
+    const persistor = persistStore( store );
+
+    return {
+        store,
+        persistor
+    };
 };
