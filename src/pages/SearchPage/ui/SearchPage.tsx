@@ -2,10 +2,10 @@ import React from 'react';
 import { Box, Container } from '@mui/material';
 import cn from 'classnames';
 import classes from './SearchPage.module.scss';
-import { getRepositories, getRepositoriesState, Repositories, repositoriesActions } from 'entities/Repositories';
+import { Repositories, repositoriesActions } from 'entities/Repositories';
 import { SearchRepoInput } from 'widgets/SearchRepoInput';
 import queryString from 'query-string';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { PerPageSelect } from 'widgets/PerPageSelect';
 
 interface ISearchPageProps {
@@ -18,9 +18,6 @@ export const SearchPage: React.FC<ISearchPageProps> = (props) => {
     } = props;
 
     const dispatch = useDispatch();
-    const {
-        repositories
-    } = useSelector( getRepositoriesState );
 
     const initPage = () => {
         const search = location.search || '';
